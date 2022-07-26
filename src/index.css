@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  font-family: Inter, sans-serif;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #293264;
+}
+.welcome--title {
+  font-family: Karla;
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 37px;
+}
+
+.welcome--body {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.welcome--button {
+  margin-top: 30px;
+  padding-block: 15px;
+  padding-inline: 40px;
+  border-radius: 12px;
+  color: white;
+  background: #4d5b9e;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
