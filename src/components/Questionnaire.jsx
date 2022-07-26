@@ -16,7 +16,7 @@ export default function Questionnaire(props) {
   const questions = results.map((result) => {
     return (
       <Question
-        key={nanoid}
+        key={nanoid()}
         question={result.question}
         c_answer={result.correct_answer}
         i_answers={result.incorrect_answers}
@@ -28,6 +28,7 @@ export default function Questionnaire(props) {
     <div className="questionnaire">
       <h1> Questionnaire</h1>
       {questions}
+      <button onClick={props.toggleCheck}>Check answer</button>
     </div>
   );
 }

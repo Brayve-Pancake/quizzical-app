@@ -22,11 +22,27 @@ export default function Question(props) {
   }
   // Randomise the order of the array
   shuffle(answersArray);
+  console.log(answersArray);
+  function handleClick(answer) {
+    console.log(answer);
+  }
+
+  function htmlDecode(input) {
+    let doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent;
+  }
 
   return (
     <div className="question">
-      <h2>{props.question}</h2>
-      <button className="answer1">{answersArray[0].answer}</button>
+      <h2>{htmlDecode(props.question)}</h2>
+      <button
+        onClick={() => {
+          handleClick(answersArray[0].isCorrect);
+        }}
+        className="answer1"
+      >
+        {answersArray[0].answer}
+      </button>
       <button className="answer2">{answersArray[1].answer}</button>
       <button className="answer3">{answersArray[2].answer}</button>
       <button className="answer4">{answersArray[3].answer}</button>

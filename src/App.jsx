@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
 import Questionnaire from "./components/Questionnaire";
 import Welcome from "./components/Welcome";
 
 function App() {
   const [display, setDisplay] = useState(false);
   const [data, setData] = useState([]);
+  const [checkAnswers, setCheckAnswers] = useState(false);
+
   const questionAPI =
     "https://opentdb.com/api.php?amount=5&category=27&difficulty=medium&type=multiple";
 
@@ -19,10 +20,16 @@ function App() {
     setDisplay((display) => !display);
   }
 
+  function toggleCheckAnswers() {
+    setCheckAnswers((checkAnswers) => !checkAnswers);
+  }
+
   return (
     <div className="App">
       {!display && <Welcome toggleDisplay={toggleDisplay} />}
-      {display && <Questionnaire data={data} />}
+      {display && (
+        <Questionnaire data={data} toggleCheck={toggleCheckAnswers} />
+      )}
     </div>
   );
 }
