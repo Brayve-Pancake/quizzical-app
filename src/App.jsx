@@ -1,5 +1,6 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
+import Questionnaire from "./components/Questionnaire";
 import Welcome from "./components/Welcome";
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
 
   return (
     <div className="App">
-      <Welcome toggleDisplay={toggleDisplay} />
+      {!display && <Welcome toggleDisplay={toggleDisplay} />}
+      {display && <Questionnaire />}
     </div>
   );
 }
