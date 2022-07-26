@@ -32,6 +32,19 @@ export default function Question(props) {
     return doc.documentElement.textContent;
   }
 
+  // Write down a process flow on paper for what should happen.
+  // if the correct radio button is clicked when submit is clicked,
+  // When submit is clicked, check each radio for the
+
+  // Store state in the App. everytime a radio button is clicked, (onChange) update the number of correct answers.
+  // if the corresponding element is correct, add 1 to count
+  // onChange, subtract 1.
+  // use some handleChange function looks at `isCorrect`
+
+  // fetch of data should be done at top level, store and split the information on the App.
+
+  // FIGURE OUT HOW I WANT THE APPLICATION TO WORK.
+
   return (
     <div className="question">
       <h2>{htmlDecode(props.question)}</h2>
