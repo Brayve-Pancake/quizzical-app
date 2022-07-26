@@ -43,9 +43,30 @@ export default function Question(props) {
       >
         {answersArray[0].answer}
       </button>
-      <button className="answer2">{answersArray[1].answer}</button>
-      <button className="answer3">{answersArray[2].answer}</button>
-      <button className="answer4">{answersArray[3].answer}</button>
+      <button
+        onClick={() => {
+          handleClick(answersArray[1].isCorrect);
+        }}
+        className="answer2"
+      >
+        {answersArray[1].answer}
+      </button>
+      <button
+        onClick={() => {
+          handleClick(answersArray[2].isCorrect);
+        }}
+        className="answer3"
+      >
+        {answersArray[2].answer}
+      </button>
+      <button
+        onClick={() => {
+          handleClick(answersArray[3].isCorrect);
+        }}
+        className="answer4"
+      >
+        {answersArray[3].answer}
+      </button>
     </div>
   );
 }
