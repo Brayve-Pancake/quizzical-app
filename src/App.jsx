@@ -17,7 +17,6 @@ function App() {
 
   function toggleDisplay() {
     setDisplay((display) => !display);
-    console.log("toggleDisplay");
   }
 
   return (
