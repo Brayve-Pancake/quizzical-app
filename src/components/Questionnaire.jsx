@@ -10,6 +10,7 @@ export default function Questionnaire(props) {
   // display the Q, then answers in element order
   // use conditional rendering within Questions.jsx
   // let array = [1, 2, 3, 4];
+  // const answers = shuffle(props.data.answersArray);
 
   // Render a Question element for each result from API fetch
   console.log("run Quest");
@@ -19,7 +20,7 @@ export default function Questionnaire(props) {
       <Question
         key={nanoid()}
         question={element.question}
-        answersArray={element.answersArray}
+        answersArray={shuffle(element.answersArray)}
       />
     );
   });
