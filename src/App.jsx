@@ -5,7 +5,6 @@ import Welcome from "./components/Welcome";
 function App() {
   const [display, setDisplay] = useState(false);
   const [data, setData] = useState([]);
-  const [checkAnswers, setCheckAnswers] = useState(false);
 
   const questionAPI =
     "https://opentdb.com/api.php?amount=5&category=27&difficulty=medium&type=multiple";
@@ -16,8 +15,6 @@ function App() {
       .then((data) =>
         setData(
           data.results.map((result) => {
-            // console.log(result);
-            // return result;
             let answersArray = [
               {
                 answer: htmlDecode(result.correct_answer),
@@ -32,8 +29,6 @@ function App() {
                 isSelected: false,
               });
             }
-            // console.log(answersArray);
-            // console.log(result.question);
             return {
               answersArray: shuffle(answersArray),
               question: htmlDecode(result.question),
@@ -54,16 +49,6 @@ function App() {
     }
     return array;
   }
-
-  // useEffect(() => {
-  //   if (data.length) {
-  //     console.log(data);
-  //   }
-  // }, [data]);
-
-  // Create an array to store all answers
-
-  // Randomise the order of the array
 
   function htmlDecode(input) {
     let doc = new DOMParser().parseFromString(input, "text/html");
