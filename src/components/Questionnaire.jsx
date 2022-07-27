@@ -11,15 +11,15 @@ export default function Questionnaire(props) {
   // use conditional rendering within Questions.jsx
   // let array = [1, 2, 3, 4];
 
-  const results = props.data.results;
   // Render a Question element for each result from API fetch
-  const questions = results.map((result) => {
+  console.log("run Quest");
+  console.log(props);
+  const questions = props.data.map((element) => {
     return (
       <Question
         key={nanoid()}
-        question={result.question}
-        c_answer={result.correct_answer}
-        i_answers={result.incorrect_answers}
+        question={element.question}
+        answersArray={element.answersArray}
       />
     );
   });
