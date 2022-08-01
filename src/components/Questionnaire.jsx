@@ -1,34 +1,71 @@
 import Question from "./Question";
 import { nanoid } from "nanoid";
+import { useEffect, useState } from "react";
 
 export default function Questionnaire(props) {
-  // Take the array of objects [{}...{}]
-  // each one has correct, incorrect and question
-  // create an array [C, I, I, I]
-  // randomise array ... eg: [I, C, I, I]
-  // pass in random array
-  // display the Q, then answers in element order
-  // use conditional rendering within Questions.jsx
-  // let array = [1, 2, 3, 4];
-  // const answers = shuffle(props.data.answersArray);
+  // Trying to add a button function that will deselect all buttons
+  // then highlight the clicked button. Changing the state
+  // Use the state to compare isSelected with isCorrect to log score
+  // If correct&&selected green, selected&&!correct red
 
-  // Render a Question element for each result from API fetch
+  const [tempData, setTempData] = useState(0);
+
+  function togData(questionId, num) {
+    console.log("togData" + "-" + num + "-" + questionId);
+
+    setTempData((prevTempData) => {
+      const newTempData = prevTempData.map((obj) => {
+        let newAnswersArray;
+        let newProps;
+        if (obj.props.id === questionId) {
+          newAnswersArray = [...obj.props.answersArray, "TTTTTTTt"];
+          newAnswersArray[num] = {
+            ...newAnswersArray[num],
+            isSelected: !newAnswersArray[num].isSelected,
+          };
+          newProps = { ...obj.props, answersArray: newAnswersArray };
+
+          return { ...obj, props: newProps };
+
+          // add in the nested object
+        }
+        return obj;
+      });
+      console.log("newTempData");
+      console.log(newTempData);
+      return newTempData;
+    });
+  }
+
   console.log("run Quest");
-  console.log(props);
-  const questions = props.data.map((element) => {
-    return (
-      <Question
-        key={nanoid()}
-        question={element.question}
-        answersArray={element.answersArray}
-      />
+
+  // After initial render,  set the Que data
+  useEffect(() => {
+    setTempData(
+      props.data.map((element) => {
+        console.log("newIds");
+        return (
+          <Question
+            key={nanoid()}
+            id={nanoid()}
+            question={element.question}
+            answersArray={element.answersArray}
+            toggleIsSelected={props.toggleIsSelected}
+            togData={togData}
+          />
+        );
+      })
     );
+  }, []);
+
+  useEffect(() => {
+    console.log(tempData);
   });
 
   return (
     <div className="questionnaire">
       <h1> Questionnaire</h1>
-      {questions}
+      {tempData}
       <button onClick={props.toggleCheck}>Check answer</button>
     </div>
   );
