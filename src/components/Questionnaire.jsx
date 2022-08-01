@@ -15,24 +15,30 @@ export default function Questionnaire(props) {
 
     setTempData((prevTempData) => {
       const newTempData = prevTempData.map((obj) => {
-        let newAnswersArray;
-        let newProps;
         if (obj.props.id === questionId) {
-          newAnswersArray = [...obj.props.answersArray, "TTTTTTTt"];
-          newAnswersArray[num] = {
-            ...newAnswersArray[num],
-            isSelected: !newAnswersArray[num].isSelected,
-          };
-          newProps = { ...obj.props, answersArray: newAnswersArray };
+          let newAnswersArray = [...obj.props.answersArray];
+
+          // Set all to false on Select, switching the selected.
+          for (let i = 0; i < 5; i++) {
+            if (i === num) {
+              newAnswersArray[num] = {
+                ...newAnswersArray[num],
+                isSelected: !newAnswersArray[num].isSelected,
+              };
+            } else {
+              newAnswersArray[i] = {
+                ...newAnswersArray[i],
+                isSelected: false,
+              };
+            }
+          }
+
+          let newProps = { ...obj.props, answersArray: newAnswersArray };
 
           return { ...obj, props: newProps };
-
-          // add in the nested object
         }
         return obj;
       });
-      console.log("newTempData");
-      console.log(newTempData);
       return newTempData;
     });
   }
