@@ -11,7 +11,7 @@ export default function Questionnaire(props) {
   const [tempData, setTempData] = useState(0);
 
   function togData(questionId, num) {
-    console.log("togData" + "-" + num + "-" + questionId);
+    // console.log("togData" + "-" + num + "-" + questionId);
 
     setTempData((prevTempData) => {
       const newTempData = prevTempData.map((obj) => {
@@ -68,11 +68,40 @@ export default function Questionnaire(props) {
     console.log(tempData);
   });
 
+  const [count, setCount] = useState(0);
+
+  function checkAnswers() {
+    // For each question
+    tempData.forEach((object) => {
+      const obj = object.props.answersArray;
+      // Check each set of answers
+      obj.forEach((ans) => {
+        if (ans.isCorrect && ans.isSelected) {
+          setCount((prevCount) => {
+            return prevCount + 1;
+          });
+        }
+      });
+    });
+  }
+
+  useEffect(() => {
+    console.log(count);
+
+    // When clicked
+
+    // Count correct number of answers
+    // if correct turn green
+    // if selected and incorrect turn red.
+    // if selected and correct, add 1 to count and
+    // Change the check answers to play again button (Conditional R)
+  });
+
   return (
     <div className="questionnaire">
       <h1> Questionnaire</h1>
       {tempData}
-      <button onClick={props.toggleCheck}>Check answer</button>
+      <button onClick={checkAnswers}>Check Answers</button>
     </div>
   );
 }

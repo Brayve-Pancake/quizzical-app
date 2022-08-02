@@ -73,20 +73,11 @@ function App() {
     setDisplay((display) => !display);
   }
 
-  // For final grading of answers
-  function toggleCheckAnswers() {
-    console.log("toggle check");
-  }
-
   return (
     <div className="App">
       {!display && <Welcome toggleDisplay={toggleDisplay} />}
       {display && (
-        <Questionnaire
-          toggleIsSelected={toggleIsSelected}
-          data={data}
-          toggleCheck={toggleCheckAnswers}
-        />
+        <Questionnaire toggleIsSelected={toggleIsSelected} data={data} />
       )}
     </div>
   );
