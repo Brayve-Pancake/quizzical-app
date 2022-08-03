@@ -75,10 +75,24 @@ export default function Questionnaire(props) {
   });
 
   function checkAnswers() {
-    // For each question
+    // Check if each question has an answer
+    let counter = 0;
+    tempData.forEach((question) => {
+      question.props.answersArray.forEach((answer) => {
+        if (answer.isSelected) {
+          counter++;
+        }
+      });
+    });
+
+    if (counter < 5) {
+      alert("answer all Qs");
+      return;
+    }
+
+    // Count correct number of answers
     tempData.forEach((object) => {
       const obj = object.props.answersArray;
-      // Check each set of answers
       obj.forEach((ans) => {
         if (ans.isCorrect && ans.isSelected) {
           setCount((prevCount) => {
