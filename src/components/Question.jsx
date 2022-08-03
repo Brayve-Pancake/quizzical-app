@@ -64,6 +64,7 @@ export default function Question(props) {
           {props.answersArray[3].answer}
         </button>
       </div>
+      <hr></hr>
     </div>
   );
 }

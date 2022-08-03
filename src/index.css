@@ -1,6 +1,7 @@
 * {
   margin: 0;
   font-family: Inter, sans-serif;
+  font-size: 16px;
 }
 
 body {
@@ -38,21 +39,24 @@ body {
   color: white;
   background: #4d5b9e;
   border: none;
-  cursor: pointer;
   font-size: 16px;
   font-weight: 500;
 }
 
-.welcome > .blobOne {
+.blobOne {
   position: absolute;
   bottom: 0px;
   left: 0px;
 }
 
-.welcome > .blobTwo {
+.blobTwo {
   position: absolute;
   top: 0px;
   right: 0px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .buttons {
@@ -69,4 +73,35 @@ body {
 
   border: none;
   border-radius: 6px;
+}
+
+.questionnaire {
+  display: flex;
+  flex-direction: column;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  width: 80vw;
+  align-self: center;
+}
+
+.end-game {
+  background: #4d5b9e;
+  color: #f5f7fb;
+  border-radius: 10px;
+  font-size: 10px;
+  font-family: Inter;
+  font-weight: 600;
+  align-self: center;
+  padding-inline: 30px;
+  padding-block: 12px;
+  margin-top: 20px;
+}
+
+.score {
+  align-self: center;
 }

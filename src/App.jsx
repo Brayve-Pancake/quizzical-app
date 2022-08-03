@@ -62,10 +62,6 @@ function App() {
     setDisplay((display) => !display);
   }
 
-  useEffect(() => {
-    console.log(data);
-  });
-
   return (
     <div className="App">
       {!display && <Welcome toggleDisplay={toggleDisplay} />}

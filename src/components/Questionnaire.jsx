@@ -115,10 +115,15 @@ export default function Questionnaire(props) {
 
   return (
     <div className="questionnaire">
+      <img src="/src/assets/blobs.svg" className="blobOne" alt="blob" />
+      <img src="/src/assets/blobs2.svg" className="blobTwo" alt="blob2" />
       {tempData}
-      {checked && <p className="score">You scored {count}/5 correct answers</p>}
+
+      {checked && (
+        <span className="score">You scored {count}/5 correct answers</span>
+      )}
       <button className="end-game" onClick={checked ? playAgain : checkAnswers}>
-        {checked ? "Play again" : "Check Answers"}
+        {checked ? "Play again" : "Check answers"}
       </button>
     </div>
   );
