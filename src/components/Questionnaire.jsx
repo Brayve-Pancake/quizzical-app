@@ -3,20 +3,46 @@ import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 
 export default function Questionnaire(props) {
-  // Trying to add a button function that will deselect all buttons
-  // then highlight the clicked button. Changing the state
-  // Use the state to compare isSelected with isCorrect to log score
-  // If correct&&selected green, selected&&!correct red
+  const [count, setCount] = useState(0);
+  const [checked, setChecked] = useState(false);
+  const [tempData, setTempData] = useState(formatData());
 
-  const [tempData, setTempData] = useState(0);
+  function formatData() {
+    return props.data.map((element) => {
+      return (
+        <Question
+          key={nanoid()}
+          id={element.id}
+          question={element.question}
+          answersArray={element.answersArray}
+          togData={togData}
+          checked={checked}
+        />
+      );
+    });
+  }
+
+  function updateData(bool) {
+    // Update the checked status, create replacement objects
+    setTempData((prevTempData) => {
+      prevTempData.forEach((obj) => {
+        obj.props.checked = bool;
+      });
+      return prevTempData.map((obj) => {
+        let newAnswersArray = [...obj.props.answersArray];
+        let newProps = { ...obj.props, answersArray: newAnswersArray };
+
+        return { ...obj, props: newProps };
+      });
+    });
+  }
 
   function togData(questionId, num) {
-    // console.log("togData" + "-" + num + "-" + questionId);
-
     setTempData((prevTempData) => {
-      const newTempData = prevTempData.map((obj) => {
-        if (obj.props.id === questionId) {
-          let newAnswersArray = [...obj.props.answersArray];
+      return prevTempData.map((obj) => {
+        const element = obj.props;
+        if (element.id === questionId) {
+          let newAnswersArray = [...element.answersArray];
 
           // Set all to false on Select, switching the selected.
           for (let i = 0; i < 5; i++) {
@@ -33,42 +59,20 @@ export default function Questionnaire(props) {
             }
           }
 
-          let newProps = { ...obj.props, answersArray: newAnswersArray };
+          let newProps = { ...element, answersArray: newAnswersArray };
 
           return { ...obj, props: newProps };
         }
         return obj;
       });
-      return newTempData;
     });
   }
 
   console.log("run Quest");
 
-  // After initial render,  set the Que data
-  useEffect(() => {
-    setTempData(
-      props.data.map((element) => {
-        console.log("newIds");
-        return (
-          <Question
-            key={nanoid()}
-            id={nanoid()}
-            question={element.question}
-            answersArray={element.answersArray}
-            toggleIsSelected={props.toggleIsSelected}
-            togData={togData}
-          />
-        );
-      })
-    );
-  }, []);
-
   useEffect(() => {
     console.log(tempData);
   });
-
-  const [count, setCount] = useState(0);
 
   function checkAnswers() {
     // For each question
@@ -83,25 +87,26 @@ export default function Questionnaire(props) {
         }
       });
     });
+    setChecked(true);
+    updateData(true);
+  }
+
+  function playAgain() {
+    window.location.reload();
   }
 
   useEffect(() => {
     console.log(count);
-
-    // When clicked
-
-    // Count correct number of answers
-    // if correct turn green
-    // if selected and incorrect turn red.
-    // if selected and correct, add 1 to count and
-    // Change the check answers to play again button (Conditional R)
   });
 
   return (
     <div className="questionnaire">
       <h1> Questionnaire</h1>
       {tempData}
-      <button onClick={checkAnswers}>Check Answers</button>
+      {checked && <p className="score">You scored {count}/5 correct answers</p>}
+      <button className="end-game" onClick={checked ? playAgain : checkAnswers}>
+        {checked ? "Play again" : "Check Answers"}
+      </button>
     </div>
   );
 }

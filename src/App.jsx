@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { useState, useEffect } from "react";
 import Questionnaire from "./components/Questionnaire";
 import Welcome from "./components/Welcome";
@@ -32,6 +33,7 @@ function App() {
             return {
               answersArray: shuffle(answersArray),
               question: htmlDecode(result.question),
+              id: nanoid(),
             };
           })
         )
@@ -55,30 +57,19 @@ function App() {
     return doc.documentElement.textContent;
   }
 
-  function toggleIsSelected(questionId, num) {
-    console.log(data);
-    console.log(questionId);
-    // set all to false
-    // set the selected to true
-
-    console.log(num);
-    // console.log(props.data[0]);
-    // if the id is the same
-    // then change that element's answersArray.
-    // console.log(questions);
-  }
-
   // For front page conditional rendering
   function toggleDisplay() {
     setDisplay((display) => !display);
   }
 
+  useEffect(() => {
+    console.log(data);
+  });
+
   return (
     <div className="App">
       {!display && <Welcome toggleDisplay={toggleDisplay} />}
-      {display && (
-        <Questionnaire toggleIsSelected={toggleIsSelected} data={data} />
-      )}
+      {display && <Questionnaire data={data} />}
     </div>
   );
 }

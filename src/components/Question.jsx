@@ -1,10 +1,31 @@
+import { useEffect } from "react";
+
 export default function Question(props) {
   function styles(x) {
-    return {
-      backgroundColor: props.answersArray[x].isSelected ? "black" : "pink",
-      color: props.answersArray[x].isSelected ? "green" : "white",
-    };
+    if (props.checked === false) {
+      return {
+        backgroundColor: props.answersArray[x].isSelected ? "blue" : "yellow",
+        color: "red",
+      };
+    } else if (props.checked === true) {
+      if (props.answersArray[x].isCorrect) {
+        return {
+          backgroundColor: "green",
+          color: "#293264",
+        };
+      }
+      if (
+        !props.answersArray[x].isCorrect &&
+        props.answersArray[x].isSelected
+      ) {
+        return {
+          backgroundColor: "pink",
+          color: "#4D5B9E",
+        };
+      }
+    }
   }
+
   return (
     <div className="question">
       <h2>{props.question}</h2>

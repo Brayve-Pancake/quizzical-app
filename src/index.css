@@ -54,3 +54,7 @@ body {
   top: 0px;
   right: 0px;
 }
+
+.question > button {
+  color: white;
+}
