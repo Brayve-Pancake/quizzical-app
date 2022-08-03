@@ -55,6 +55,18 @@ body {
   right: 0px;
 }
 
-.question > button {
-  color: white;
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.buttons > .answer {
+  height: 20px;
+  min-width: 65px;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+
+  border: none;
+  border-radius: 6px;
 }

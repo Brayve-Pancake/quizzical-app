@@ -115,7 +115,6 @@ export default function Questionnaire(props) {
 
   return (
     <div className="questionnaire">
-      <h1> Questionnaire</h1>
       {tempData}
       {checked && <p className="score">You scored {count}/5 correct answers</p>}
       <button className="end-game" onClick={checked ? playAgain : checkAnswers}>
